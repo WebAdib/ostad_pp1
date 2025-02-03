@@ -84,12 +84,29 @@ void main() {
    */
 }
 
+// My application
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primaryColor: Colors.blue,
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        appBarTheme: AppBarTheme(
+          color: Colors.blue,
+          centerTitle: true,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blue,
+            foregroundColor: Colors.white,
+            elevation: 4.0,
+          ),
+        ),
+      ),
       title: '1st Practice App',
       debugShowCheckedModeBanner: false,
       home: MyHomePage(),
@@ -97,175 +114,177 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// My home page
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ////// Text Controller
-    final TextEditingController _nameController = TextEditingController();
-    final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _passwordController = TextEditingController();
-    final TextEditingController _phoneNumberController =
-        TextEditingController();
+    /// Form Keys
+    final _formKeys = GlobalKey<FormState>();
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightBlue,
+        //backgroundColor: Colors.lightBlue,
         title: Text(
-          'My First App 2',
+          'M8_Class2',
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
-        centerTitle: true,
+        //centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              //// Form fields
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: TextField(
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                    labelText: 'Enter your name',
-                    hintText: 'Enter your name',
-                    hintStyle: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black.withOpacity(0.5),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Form(
+                key: _formKeys,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      onChanged: (value) {
+                        print('Text Field value changed: $value');
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Enter your name',
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Name is required';
+                        }
+                        return null;
+                      },
                     ),
-                    //fillColor: Colors.grey.withOpacity(0.1),
-                    // focusedBorder: OutlineInputBorder(
-                    //   borderRadius: BorderRadius.circular(5),
-                    //   borderSide: BorderSide(color: Colors.black),
-                    //),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(color: Colors.black),
+                    SizedBox(height: 12),
+                    TextFormField(
+                        onChanged: (value) {
+                          print('Text Field value changed: $value');
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Enter your email address',
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Email is required';
+                          }
+                          if (!value.contains('@')) {
+                            return 'Email is not valid';
+                          }
+                          return null;
+                        }),
+                    SizedBox(height: 12),
+                    TextFormField(
+                        onChanged: (value) {
+                          print('Text Field value changed: $value');
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Enter your password',
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Password is required';
+                          }
+                          if (value.length < 6) {
+                            return 'Password must be at least 6 characters long';
+                          }
+                          return null;
+                        }),
+                    SizedBox(height: 12),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        elevation: 4.0,
+                      ),
+                      onPressed: () {
+                        if (_formKeys.currentState!.validate()) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => UserInfo()));
+                          print('Button pressed');
+                        }
+                      },
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: TextField(
-                  controller: _emailController,
-                  obscureText: true, // to hide password
-                  decoration: InputDecoration(
-                    labelText: 'Enter your email address',
-                    hintText: 'Enter your email address',
-                    hintStyle: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                    //fillColor: Colors.grey.withOpacity(0.1),
-                    // focusedBorder: OutlineInputBorder(
-                    //   borderRadius: BorderRadius.circular(5),
-                    //   borderSide: BorderSide(color: Colors.black),
-                    //),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: TextField(
-                  controller: _phoneNumberController,
-                  obscureText: false,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: 'Enter your phone number',
-                    hintText: 'Enter your phone number',
-                    hintStyle: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                    //fillColor: Colors.grey.withOpacity(0.1),
-                    // focusedBorder: OutlineInputBorder(
-                    //   borderRadius: BorderRadius.circular(5),
-                    //   borderSide: BorderSide(color: Colors.black),
-                    //),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: TextField(
-                  controller: _passwordController,
-                  obscureText: true, // to hide password
-                  decoration: InputDecoration(
-                    labelText: 'Enter your password',
-                    hintText: 'Enter your password',
-                    hintStyle: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                    //fillColor: Colors.grey.withOpacity(0.1),
-                    // focusedBorder: OutlineInputBorder(
-                    //   borderRadius: BorderRadius.circular(5),
-                    //   borderSide: BorderSide(color: Colors.black),
-                    //),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                  ),
-                ),
-              ),
+                    SizedBox(height: 10),
+                    Text('Error message'),
+                  ],
+                )),
+          )
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print('Floating Action Button clicked');
+        },
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
 
-              ////// controller text
-              Text(
-                _nameController.text,
-                style: TextStyle(fontSize: 20, color: Colors.black),
-              ),
-              Text(
-                _emailController.text,
-                style: TextStyle(fontSize: 20, color: Colors.black),
-              ),
-              Text(
-                _phoneNumberController.text,
-                style: TextStyle(fontSize: 20, color: Colors.black),
-              ),
-              Text(
-                _passwordController.text,
-                style: TextStyle(fontSize: 20, color: Colors.black),
-              ),
-              Divider(),
-              ListTile(
-                title: Text('Form Validation'),
-                subtitle: Text('Software Engineer'),
-                leading: Icon(Icons.engineering),
-                onTap: () {
-                  print("I'm List Tile");
-                },
-              ),
+// user info page
+class UserInfo extends StatelessWidget {
+  const UserInfo({super.key});
 
-              ////// Button
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  elevation: 4.0,
-                ),
-                onPressed: () {
-                  print('Form submitted');
-                  print(_nameController.text);
-                  print(_emailController.text);
-                  print(_phoneNumberController.text);
-                  print(_passwordController.text);
-                },
-                child: Text('Submit', style: TextStyle(color: Colors.white)),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        //backgroundColor: Colors.lightBlue,
+        title: Text(
+          'User Information',
+          style: TextStyle(fontSize: 20, color: Colors.white),
+        ),
+        //centerTitle: true,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text("User Information"),
+            ElevatedButton(
+              onPressed: () {
+                //Navigator.push(context,MaterialPageRoute(builder: (context) => MyApp()));
+                Navigator.pop(context);
+              },
+              child: Text("Back"),
+            ),
+            SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: 400,
+                child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 6,
+                        crossAxisSpacing: 5,
+                        mainAxisSpacing: 5),
+                    itemCount: 260,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        child: Center(
+                          child: Text(
+                            "${index + 1}",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          border: Border.all(color: Colors.black, width: 1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      );
+                    }),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
