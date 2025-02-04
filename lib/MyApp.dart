@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       ),
       title: '1st Practice App',
       debugShowCheckedModeBanner: false,
-      home: Module_9Class1(),
+      home: WrapExample(),
     );
   }
 }

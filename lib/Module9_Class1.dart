@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Media queries
 class Module_9Class1 extends StatelessWidget {
   const Module_9Class1({super.key});
 
@@ -28,6 +29,58 @@ class Module_9Class1 extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+//wrap example
+class WrapExample extends StatelessWidget {
+  final List<String> categories = [
+    'Fruits',
+    'Fish',
+    'Pineapple',
+    'Snacks',
+    'Chips',
+    'Bakery',
+    'Vegetable'
+  ];
+  //const WrapExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Wrap Example'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Wrap(
+              spacing: 4,
+              children: categories.map((category) {
+                return Chip(
+                  label: Text(category),
+                  backgroundColor: Colors.lightBlueAccent,
+                );
+              }).toList(),
+            ),
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 4,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 5,
+                children: List.generate(
+                  150,
+                  (index) => Chip(
+                      label: Text("Item ${index}"),
+                      backgroundColor: Colors.redAccent),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
