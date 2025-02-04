@@ -1,5 +1,6 @@
 // My application
 import 'package:flutter/material.dart';
+import 'package:ostad_pp1/Module9_Class1.dart';
 
 import 'MyHomePage.dart';
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           color: Colors.blue,
           centerTitle: true,
+          foregroundColor: Colors.white,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
       ),
       title: '1st Practice App',
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      home: Module_9Class1(),
     );
   }
 }
