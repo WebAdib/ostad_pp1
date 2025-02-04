@@ -86,3 +86,46 @@ class WrapExample extends StatelessWidget {
     );
   }
 }
+
+//Layout Builder
+class LayoutBuilder1 extends StatelessWidget {
+  const LayoutBuilder1({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Layout Builder Example'),
+      ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth > 400) {
+            return GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+              ),
+              itemCount: 15,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.all(5.0),
+                  child: Card(
+                    child: Text("Item ${index + 1}"),
+                  ),
+                );
+              },
+            );
+          } else {
+            return SingleChildScrollView(
+              child: Column(
+                children: List.generate(
+                  11,
+                  (index) => Text("Item $index"),
+                ),
+              ),
+            );
+          }
+        },
+      ),
+    );
+  }
+}
