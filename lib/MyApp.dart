@@ -4,6 +4,7 @@ import 'package:device_preview/device_preview.dart';
 
 import 'package:ostad_pp1/Module9_Class1.dart';
 
+import 'Module11_Class1.dart';
 import 'Module9_Class2.dart';
 import 'Module9_Class3.dart';
 import 'MyHomePage.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
         ),
         title: '1st Practice App',
         debugShowCheckedModeBanner: false,
-        home: Module9_Class3(),
+        home: Module11_Class1(),
       );
     });
   }
