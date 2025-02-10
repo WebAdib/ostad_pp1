@@ -38,7 +38,7 @@ class _Module11_Class1State extends State<Module11_Class1> {
                       elevation: 5,
                       behavior: SnackBarBehavior.floating, // Makes it float
                       margin: EdgeInsets.only(
-                          bottom: 100,
+                          //bottom: 0,
                           left: 20,
                           right: 20), // Adjust bottom margin
                       duration: const Duration(seconds: 2),
@@ -125,6 +125,14 @@ class _Module11_Class1State extends State<Module11_Class1> {
                       cityImg:
                           'https://images.unsplash.com/photo-1653932133705-851f4547eb2b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
                       cityName: 'Chottogram',
+                      cityDescription:
+                          'lorem ipsum dolor sit amet, consectetur adipiscing el aspect et non proident',
+                    ),
+                    SizedBox(width: 15),
+                    CityWidget(
+                      cityImg:
+                          'https://images.unsplash.com/photo-1653932133705-851f4547eb2b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                      cityName: 'Sylhet',
                       cityDescription:
                           'lorem ipsum dolor sit amet, consectetur adipiscing el aspect et non proident',
                     ),
